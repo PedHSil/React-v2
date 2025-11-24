@@ -27,7 +27,7 @@ export default function About() {
                         <h1 id="sobre-title" className={styles.title}>
                             Pedro Henrique da Silva
                         </h1>
-                        <p className={styles.subtitle}>Front-end Developer</p>
+                        <p className={styles.subtitle}>Full-stack Developer Junior</p>
                     </div>
 
                     {/* Bloco de código com informações */}
