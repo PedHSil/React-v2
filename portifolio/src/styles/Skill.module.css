@@ -1,0 +1,211 @@
+/* Seção externa */
+.section {
+  width: 100%;
+  max-width: 1400px;
+  margin: 80px auto;
+  padding: 40px 28px;
+  box-sizing: border-box;
+}
+
+/* Título com gradiente */
+.title {
+  font-size: 2.8rem;
+  background: linear-gradient(135deg, #E6EEF8 0%, #9BD1FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0 0 48px 0;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+  text-align: center;
+}
+
+/* Grid de cards */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+/* Card de skill */
+.skillCard {
+  background: rgba(7, 16, 38, 0.4);
+  border: 1px solid rgba(155, 209, 255, 0.15);
+  border-radius: 20px;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 24px rgba(2, 6, 20, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.skillCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, rgba(155, 209, 255, 0.5), transparent);
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+.skillCard:hover {
+  transform: translateY(-8px);
+  border-color: rgba(155, 209, 255, 0.3);
+  box-shadow: 0 16px 40px rgba(2, 6, 20, 0.6), 0 0 0 1px rgba(155, 209, 255, 0.1);
+  background: rgba(7, 16, 38, 0.6);
+}
+
+.skillCard:hover::before {
+  opacity: 1;
+}
+
+/* Círculo do ícone */
+.iconCircle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(155, 209, 255, 0.1), rgba(155, 209, 255, 0.05));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(155, 209, 255, 0.2);
+  transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.skillCard:hover .iconCircle {
+  background: linear-gradient(135deg, #E6EEF8, #9BD1FF);
+  border-color: rgba(230, 238, 248, 0.6);
+  transform: scale(1.08);
+  box-shadow: 0 8px 24px rgba(155, 209, 255, 0.4);
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+  transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.85;
+}
+
+.lucideIcon {
+  width: 40px;
+  height: 40px;
+  color: rgba(155, 209, 255, 0.85);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+  transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.skillCard:hover .icon {
+  transform: scale(1.1);
+  opacity: 1;
+  filter: drop-shadow(0 6px 16px rgba(2, 6, 20, 0.8));
+}
+
+.skillCard:hover .lucideIcon {
+  transform: scale(1.1);
+  color: #020618;
+  filter: drop-shadow(0 6px 16px rgba(2, 6, 20, 0.8));
+}
+
+/* Nome da skill */
+.skillName {
+  font-size: 1.3rem;
+  color: #E6EEF8;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.3px;
+}
+
+/* Descrição */
+.skillDescription {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: rgba(230, 238, 248, 0.7);
+  margin: 0;
+  font-weight: 400;
+}
+
+/* Responsivo - Tablet */
+@media (max-width: 1024px) {
+  .section {
+    padding: 32px 24px;
+    max-width: 1100px;
+    margin: 60px auto;
+  }
+
+  .title {
+    font-size: 2.4rem;
+    margin-bottom: 40px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+  }
+}
+
+/* Responsivo - Mobile */
+@media (max-width: 768px) {
+  .section {
+    padding: 24px 20px;
+    margin: 40px auto;
+  }
+
+  .title {
+    font-size: 2rem;
+    margin-bottom: 32px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+  }
+
+  .skillCard {
+    padding: 24px 20px;
+  }
+
+  .iconCircle {
+    width: 70px;
+    height: 70px;
+  }
+
+  .icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .lucideIcon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .skillName {
+    font-size: 1.15rem;
+  }
+
+  .skillDescription {
+    font-size: 0.88rem;
+  }
+}
+
+/* Responsivo - Mobile pequeno */
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+}

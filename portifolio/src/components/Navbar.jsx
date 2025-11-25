@@ -6,8 +6,8 @@ export default function Navbar() {
 
   const links = [
     { id: "sobre", label: "Sobre mim", href: "#sobre" },
+    { id: "linguagens", label: "Skill-Sets", href: "#skillsets" },
     { id: "projetos", label: "Projetos", href: "#projetos" },
-    { id: "curriculo", label: "Currículo", href: "#curriculo" },
     { id: "contato", label: "Contato", href: "#contato" },
   ];
 

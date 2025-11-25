@@ -17,3 +17,7 @@ If you are developing a production application, we recommend using TypeScript wi
 
 npm create vite@latest meu-projeto --template react
 npm install
+
+npm install simple-icons
+
+npm install lucide-react
