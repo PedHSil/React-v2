@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "../styles/Navbar.module.css";
+import { Github, Linkedin, Mail } from "lucide-react";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -11,7 +12,6 @@ export default function Navbar() {
     { id: "contato", label: "Contato", href: "#contato" },
   ];
 
-  // fecha o menu ao redimensionar para desktop (bom para UX)
   useEffect(() => {
     function handleResize() {
       if (window.innerWidth > 720 && open) setOpen(false);
@@ -20,7 +20,6 @@ export default function Navbar() {
     return () => window.removeEventListener("resize", handleResize);
   }, [open]);
 
-  // fecha ao clicar num link (mobile)
   function handleLinkClick() {
     setOpen(false);
   }
@@ -28,23 +27,64 @@ export default function Navbar() {
   return (
     <header className={styles.navbar}>
       <nav className={styles.container} aria-label="Navegação principal">
-        {/* Lista centralizada de links */}
-        <ul className={`${styles.navList} ${open ? "open" : ""}`}>
+        {/* LEFT: brand */}
+        <div className={styles.brand}>
+          <a href="#top" className={styles.brandLink}>
+            {/* substitua por <img src="/logo.svg" alt="Logo" className={styles.brandLogoImg} /> se tiver SVG */}
+            <span className={styles.brandLogo}>PS</span>
+            <span className={styles.brandName}>Pedro Silva</span>
+          </a>
+        </div>
+
+        {/* CENTER: links */}
+        <ul className={`${styles.navList} ${open ? styles.open : ""}`} role="menubar">
           {links.map((l) => (
-            <li key={l.id} className={styles.navItem}>
+            <li key={l.id} className={styles.navItem} role="none">
               <a
                 className={styles.link}
                 href={l.href}
                 onClick={handleLinkClick}
-                /* caso use react-router, troque por NavLink para controlar .active */
+                role="menuitem"
               >
                 {l.label}
               </a>
             </li>
           ))}
+
+          {/* Socials dentro do menu (aparecem apenas em mobile quando o menu está aberto) */}
+          
         </ul>
 
-        {/* botão hamburger - aparece só em telas pequenas */}
+        {/* RIGHT: social icons (desktop) */}
+        <div className={styles.socials} aria-hidden={open}>
+          <a
+            className={styles.iconLink}
+            href="https://github.com/PedHSil"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+          >
+            <Github size={18} />
+          </a>
+          <a
+            className={styles.iconLink}
+            href="https://www.linkedin.com/in/pedro-silva-63630228a/?locale=en_US"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+          >
+            <Linkedin size={18} />
+          </a>
+          <a
+            className={styles.iconLink}
+            href="mailto:pedroh422silva@gmail.com"
+            aria-label="Enviar email"
+          >
+            <Mail size={18} />
+          </a>
+        </div>
+
+        {/* hamburger */}
         <button
           className={styles.toggle}
           aria-expanded={open}

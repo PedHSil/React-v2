@@ -28,26 +28,26 @@ export default function Contact() {
     {
       icon: <Mail size={20} />,
       label: 'Email',
-      value: 'seu.email@exemplo.com',
-      href: 'mailto:seu.email@exemplo.com'
+      value: 'pedroh422silva@gmail.com',
+      href: 'mailto:pedroh422silva@gmail.com'
     },
     {
       icon: <Phone size={20} />,
       label: 'Telefone',
-      value: '+55 (19) 99999-9999',
-      href: 'tel:+5519999999999'
+      value: '+55 (19) 98263-4944',
+      href: 'tel:+5519982634944'
     },
     {
       icon: <Github size={20} />,
       label: 'GitHub',
-      value: 'github.com/seuusuario',
-      href: 'https://github.com/seuusuario'
+      value: 'github.com/PedHSil',
+      href: 'https://github.com/PedHSil'
     },
     {
       icon: <Linkedin size={20} />,
       label: 'LinkedIn',
-      value: 'linkedin.com/in/seuusuario',
-      href: 'https://linkedin.com/in/seuusuario'
+      value: 'linkedin.com/in/pedro-silva',
+      href: 'https://www.linkedin.com/in/pedro-silva-63630228a/?locale=en_US'
     }
   ];
 
@@ -95,7 +95,7 @@ export default function Contact() {
               <p className={styles.socialTitle}>Me encontre também em:</p>
               <div className={styles.socialLinks}>
                 <a 
-                  href="https://twitter.com/seuusuario" 
+                  href="https://x.com/PedroHSIL_?t=CYrKQt9qPGO0MUMbHG_BoQ&s=09" 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className={styles.socialLink}
@@ -104,7 +104,7 @@ export default function Contact() {
                   <Twitter size={24} />
                 </a>
                 <a 
-                  href="https://instagram.com/seuusuario" 
+                  href="https://www.instagram.com/pedr.hsilva/" 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className={styles.socialLink}

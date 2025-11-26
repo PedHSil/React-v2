@@ -1,0 +1,46 @@
+:root {
+  --bg: #020618;
+  --panel: #071026;
+  --accent: #E6EEF8;
+  --muted: rgba(230, 238, 248, 0.88);
+  --accent-strong: #9BD1FF;
+  --radius: 20px;
+  --gap: 24px;
+  --shadow-soft: 0 12px 30px rgba(2, 6, 20, 0.6);
+}
+
+/* Animação de pulso para o glow */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.footer{
+     border: 1px solid rgba(155, 209, 255, 0.1);
+}
+
+.footerText {
+  color: rgba(230, 238, 248, 0.75);
+  font-size: 1.1rem;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
