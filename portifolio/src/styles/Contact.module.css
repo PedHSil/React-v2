@@ -1,0 +1,351 @@
+:root {
+  --bg: #020618;
+  --panel: #071026;
+  --accent: #E6EEF8;
+  --muted: rgba(230, 238, 248, 0.88);
+  --accent-strong: #9BD1FF;
+  --radius: 20px;
+  --gap: 24px;
+  --shadow-soft: 0 12px 30px rgba(2, 6, 20, 0.6);
+}
+
+/* Animação de pulso para o glow */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Seção externa */
+/* Seção externa */
+.section {
+  width: 100%;
+  max-width: 1400px;
+  margin: 80px auto;
+  padding: 40px 28px;
+  box-sizing: border-box;
+}
+
+/* Título com gradiente */
+.title {
+  font-size: 2.8rem;
+  background: linear-gradient(135deg, #E6EEF8 0%, #9BD1FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0 0 16px 0;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+  text-align: center;
+}
+
+/* Subtítulo */
+.subtitle {
+  color: rgba(230, 238, 248, 0.75);
+  font-size: 1.1rem;
+  text-align: center;
+  margin-bottom: 48px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Card principal - Grid layout */
+.card {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 48px;
+  align-items: start;
+  position: relative;
+}
+
+/* Coluna de informações */
+.infoColumn {
+  position: sticky;
+  top: 100px;
+}
+
+.infoContent {
+  background: rgba(155, 209, 255, 0.03);
+  border: 1px solid rgba(155, 209, 255, 0.1);
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 12px 30px rgba(2, 6, 20, 0.6);
+}
+
+.infoTitle {
+  font-size: 1.5rem;
+  color: #E6EEF8;
+  font-weight: 700;
+  margin-bottom: 12px;
+  margin-top: 0;
+}
+
+.infoText {
+  color: rgba(230, 238, 248, 0.7);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+/* Lista de contatos */
+.contactList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background: rgba(155, 209, 255, 0.05);
+  border: 1px solid rgba(155, 209, 255, 0.1);
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.contactItem:hover {
+  background: rgba(155, 209, 255, 0.1);
+  transform: translateX(8px);
+  border-color: rgba(155, 209, 255, 0.3);
+}
+
+.iconWrapper {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: rgba(155, 209, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9BD1FF;
+  flex-shrink: 0;
+}
+
+.contactText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.contactLabel {
+  font-size: 0.85rem;
+  color: rgba(230, 238, 248, 0.6);
+  font-weight: 500;
+}
+
+.contactValue {
+  font-size: 0.95rem;
+  color: #E6EEF8;
+  font-weight: 600;
+}
+
+/* Divisor */
+.divider {
+  height: 1px;
+  background: rgba(155, 209, 255, 0.1);
+  margin: 32px 0;
+}
+
+/* Redes sociais */
+.socialSection {
+  text-align: center;
+}
+
+.socialTitle {
+  font-size: 0.9rem;
+  color: rgba(230, 238, 248, 0.7);
+  margin-bottom: 16px;
+}
+
+.socialLinks {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.socialLink {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(155, 209, 255, 0.05);
+  border: 1px solid rgba(155, 209, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9BD1FF;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+}
+
+.socialLink:hover {
+  background: rgba(155, 209, 255, 0.15);
+  transform: translateY(-4px);
+  border-color: rgba(155, 209, 255, 0.3);
+}
+
+/* Coluna do formulário */
+.formColumn {
+  background: rgba(155, 209, 255, 0.03);
+  border: 1px solid rgba(155, 209, 255, 0.1);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 12px 30px rgba(2, 6, 20, 0.6);
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 0.92rem;
+  color: #E6EEF8;
+  font-weight: 600;
+}
+
+.input,
+.textarea {
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(155, 209, 255, 0.2);
+  background: rgba(7, 16, 38, 0.6);
+  color: #E6EEF8;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 200ms ease;
+  font-family: inherit;
+}
+
+.input:focus,
+.textarea:focus {
+  border-color: rgba(155, 209, 255, 0.4);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.button {
+  padding: 14px 28px;
+  border-radius: 12px;
+  border: 1px solid rgba(155, 209, 255, 0.3);
+  background: linear-gradient(135deg, rgba(155, 209, 255, 0.18), rgba(155, 209, 255, 0.08));
+  color: #E6EEF8;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 16px rgba(155, 209, 255, 0.15);
+  margin-top: 8px;
+}
+
+.button:hover,
+.button:focus {
+  background: linear-gradient(135deg, rgba(155, 209, 255, 0.25), rgba(155, 209, 255, 0.15));
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(155, 209, 255, 0.25);
+  outline: none;
+}
+
+/* Responsivo - Tablet */
+@media (max-width: 1024px) {
+  .section {
+    padding: 32px 24px;
+    max-width: 1100px;
+    margin: 60px auto;
+  }
+
+  .card {
+    grid-template-columns: 360px 1fr;
+    gap: 40px;
+  }
+
+  .title {
+    font-size: 2.4rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+}
+
+/* Responsivo - Mobile */
+@media (max-width: 768px) {
+  .section {
+    padding: 24px 20px;
+    margin: 40px auto;
+  }
+
+  .card {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .infoColumn {
+    position: static;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 0.98rem;
+  }
+
+  .formColumn {
+    padding: 32px 24px;
+  }
+}
+
+/* Responsivo - Mobile pequeno */
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .infoContent {
+    padding: 24px;
+  }
+
+  .formColumn {
+    padding: 24px 20px;
+  }
+
+  .button {
+    padding: 12px 24px;
+    font-size: 0.95rem;
+  }
+}
