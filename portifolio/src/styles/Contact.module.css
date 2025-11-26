@@ -163,7 +163,7 @@
 .divider {
   height: 1px;
   background: rgba(155, 209, 255, 0.1);
-  margin: 32px 0;
+  margin: 22px 0;
 }
 
 /* Redes sociais */
@@ -221,7 +221,7 @@
 .formGroup {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .label {

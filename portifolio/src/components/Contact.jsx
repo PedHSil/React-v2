@@ -66,7 +66,7 @@ export default function Contact() {
           <div className={styles.infoContent}>
             <h2 className={styles.infoTitle}>Informações de Contato</h2>
             <p className={styles.infoText}>
-              Sinta-se à vontade para entrar em contato. Respondo geralmente em até 24 horas.
+              Sinta-se à vontade para entrar em contato. 
             </p>
             
             <div className={styles.contactList}>
