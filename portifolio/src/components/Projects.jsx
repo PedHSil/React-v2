@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
 import styles from '../styles/Projects.module.css'
 import { ExternalLink, X, Github } from 'lucide-react'
+import Ampere from '../imgs/ampere.png'
 
 const projectsData = [
   {
     id: 1,
-    title: "E-commerce Platform",
-    shortDescription: "Plataforma completa de e-commerce com carrinho de compras, sistema de pagamento integrado e painel administrativo.",
-    fullDescription: "Sistema completo de e-commerce desenvolvido com React e Node.js, incluindo autenticação de usuários, carrinho de compras, integração com gateway de pagamento, painel administrativo para gerenciamento de produtos, pedidos e clientes. O projeto conta com design responsivo, otimização SEO e sistema de busca avançada.",
-    image: "https://images.unsplash.com/photo-1557821552-17105176677c?w=800&h=500&fit=crop",
-    technologies: ["React", "Node.js", "MongoDB", "Express", "Stripe"],
-    github: "https://github.com/seu-usuario/projeto",
-    demo: "https://projeto-demo.com"
+    title: "Ampere do Brasil",
+    shortDescription: "Site dinamico para empresa de energia solar, com sistema de gerenciamento de conteúdo personalizado.",
+    fullDescription: "Desenvolvimento de um site corporativo para Ampere do Brasil, empresa em cabos eletricos de diferentes segmentos. O site apresenta um design moderno e responsivo, com seções detalhadas sobre os serviços oferecidos, projetos realizados e informações institucionais. Inclui um sistema de gerenciamento de conteúdo (CMS) personalizado para facilitar atualizações futuras pelo cliente.",
+    image: Ampere,
+    technologies: ["PHP", "HTML", "CSS", "MySQL"],
+    demo: "https://www.amperecompany.com/"
   },
   {
     id: 2,
