@@ -5,9 +5,38 @@
   align-items: center;
   justify-content: center;
   padding: 60px 20px;
-  background: linear-gradient(135deg, #0a0e1a 0%, #1a1f35 50%, #0a0e1a 100%);
   overflow: hidden;
   margin-top: -100px;
+}
+
+
+/* Background shapes na tela inteira */
+.hero::before {
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(6, 182, 212, 0.08));
+  border-radius: 50%;
+  filter: blur(80px);
+  top: -150px;
+  right: 10%;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: linear-gradient(225deg, rgba(59, 130, 246, 0.04), rgba(6, 182, 212, 0.04));
+  border-radius: 50%;
+  filter: blur(80px);
+  bottom: -120px;
+  left: 10%;
+  opacity: 0.3;
+  pointer-events: none;
 }
 
 /* Animated Background Shapes */

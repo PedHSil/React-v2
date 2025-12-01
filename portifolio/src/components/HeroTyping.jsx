@@ -77,11 +77,7 @@ export default function HeroTyping({
   return (
     <section className={styles.hero}>
       {/* Animated Background */}
-      <div className={styles.bgAnimation}>
-        <div className={styles.shape}></div>
-        <div className={styles.shape}></div>
-        <div className={styles.shape}></div>
-      </div>
+      
 
       {/* Content Container */}
       <div className={styles.container}>
@@ -140,12 +136,7 @@ export default function HeroTyping({
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <div className={styles.scrollIndicator}>
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      </div>
+      
     </section>
   );
 }

@@ -1,9 +1,10 @@
 :root {
-  --bg: #020618;
-  --panel: #071026;
-  --accent: #E6EEF8;
-  --muted: rgba(230, 238, 248, 0.88);
-  --accent-strong: #9BD1FF;
+  --bg: #0a0e1a;
+  --panel: #1a1f35;
+  --accent: #e2e8f0;
+  --muted: #94a3b8;
+  --accent-strong: #60a5fa;
+  --accent-cyan: #06b6d4;
   --radius: 20px;
   --gap: 24px;
   --shadow-soft: 0 12px 30px rgba(2, 6, 20, 0.6);
@@ -30,13 +31,22 @@
   }
 }
 
-/* Seção externa */
+/* Wrapper externo para background full-width */
 .section {
+  position: relative;
   width: 100%;
+  padding: 80px 0;
+  overflow: hidden;
+}
+
+
+/* Container interno com max-width */
+.container {
+  position: relative;
   max-width: 1400px;
-  margin: 80px auto;
-  padding: 40px 28px;
-  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 0 28px;
+  z-index: 1;
 }
 
 /* Card principal - Grid layout */
@@ -46,6 +56,7 @@
   gap: 48px;
   align-items: center;
   position: relative;
+  z-index: 1;
 }
 
 /* Container da imagem */
@@ -54,23 +65,26 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-shrink: 0;
 }
 
 .avatarContainer {
   position: relative;
-  width: 580px;
-  height: 580px;
+  width: 380px;
+  height: 380px;
+  flex-shrink: 0;
+  animation: float 6s ease-in-out infinite;
 }
 
-/* Efeito de brilho atrás da imagem */
+/* Efeito de brilho atrás da imagem - agora compatível com Hero */
 .avatarGlow {
   position: absolute;
   inset: -20px;
-  background: linear-gradient(135deg, rgba(155, 209, 255, 0.15), rgba(155, 209, 255, 0.05));
+  background: linear-gradient(135deg, #3b82f6, #06b6d4);
   border-radius: 24px;
-  filter: blur(30px);
-  opacity: 0.6;
-  animation: pulse 3s ease-in-out infinite;
+  filter: blur(40px);
+  opacity: 0.4;
+  animation: pulse 4s ease-in-out infinite;
 }
 
 /* Imagem principal */
@@ -79,14 +93,12 @@
   height: 100%;
   object-fit: cover;
   border-radius: 20px;
-  border: 2px solid rgba(155, 209, 255, 0.2);
-  box-shadow: 0 20px 60px rgba(2, 6, 20, 0.8);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
   position: relative;
   z-index: 1;
   transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-
-
 
 /* Área de texto */
 .text {
@@ -104,24 +116,24 @@
   margin-bottom: 8px;
 }
 
-/* Título com gradiente */
+/* Título com gradiente - mesma paleta do Hero */
 .title {
   font-size: 2.8rem;
-  background: linear-gradient(135deg, #E6EEF8 0%, #9BD1FF 100%);
+  background: linear-gradient(135deg, #60a5fa, #06b6d4);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   margin: 0;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.5px;
   line-height: 1.1;
 }
 
 /* Subtítulo */
 .subtitle {
-  color: var(--accent-strong);
+  color: #94a3b8;
   font-size: 1.15rem;
-  font-weight: 600;
+  font-weight: 500;
   margin: 0;
   opacity: 0.9;
 }
@@ -131,29 +143,30 @@
   font-size: 1.05rem;
   line-height: 1.8;
   text-align: justify;
-  color: rgba(230, 238, 248, 0.85);
+  color: #94a3b8;
   margin: 0;
   font-weight: 400;
 }
 
 /* Bloco de código */
 .codeBlock {
-  background: #1e1e2e;
+  background: rgba(26, 31, 53, 0.6);
+  backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   padding: 0;
   font-family: 'Fira Code', 'Courier New', monospace;
   font-size: 0.92rem;
   line-height: 1.8;
-  color: rgba(230, 238, 248, 0.9);
+  color: #e2e8f0;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
 /* Header do bloco de código */
 .codeHeader {
-  background: #2a2a3a;
+  background: rgba(10, 14, 26, 0.8);
   padding: 12px 16px;
   display: flex;
   align-items: center;
@@ -190,16 +203,16 @@
 }
 
 .codeKey {
-  color: #ffffff;
+  color: #60a5fa;
   font-weight: 600;
 }
 
 .codeValue {
-  color: rgba(230, 238, 248, 0.85);
+  color: #e2e8f0;
 }
 
 .codeString {
-  color: #c2e9fc;
+  color: #06b6d4;
 }
 
 .codeNumber {
@@ -207,7 +220,7 @@
 }
 
 .codeComment {
-  color: rgba(155, 209, 255, 0.5);
+  color: #64748b;
   font-style: italic;
 }
 
@@ -226,9 +239,9 @@
   gap: 6px;
   padding: 8px 16px;
   border-radius: 999px;
-  background: rgba(155, 209, 255, 0.08);
-  color: rgba(230, 238, 248, 0.9);
-  border: 1px solid rgba(155, 209, 255, 0.15);
+  background: rgba(59, 130, 246, 0.1);
+  color: #e2e8f0;
+  border: 1px solid rgba(59, 130, 246, 0.3);
   font-size: 0.88rem;
   font-weight: 600;
   transition: all 200ms ease;
@@ -236,12 +249,12 @@
 }
 
 .chip:hover {
-  background: rgba(155, 209, 255, 0.15);
+  background: rgba(59, 130, 246, 0.15);
   transform: translateY(-2px);
-  border-color: rgba(155, 209, 255, 0.3);
+  border-color: rgba(59, 130, 246, 0.4);
 }
 
-/* Botões de ação */
+/* Botões de ação - alinhados com Hero */
 .ctaRow {
   display: flex;
   gap: 14px;
@@ -251,48 +264,52 @@
 }
 
 .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   padding: 12px 24px;
   border-radius: 12px;
   font-weight: 600;
   font-size: 0.98rem;
-  border: 1px solid rgba(155, 209, 255, 0.2);
-  background: rgba(155, 209, 255, 0.05);
-  color: var(--accent);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: #e2e8f0;
   cursor: pointer;
+  backdrop-filter: blur(10px);
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
 }
 
 .btn:hover,
 .btn:focus {
-  transform: translateY(-4px);
-  background: rgba(155, 209, 255, 0.12);
-  box-shadow: 0 8px 24px rgba(155, 209, 255, 0.2);
-  border-color: rgba(155, 209, 255, 0.4);
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
   outline: none;
 }
 
 .btnPrimary {
-  background: linear-gradient(135deg, rgba(155, 209, 255, 0.18), rgba(155, 209, 255, 0.08));
-  border: 1px solid rgba(155, 209, 255, 0.3);
-  box-shadow: 0 4px 16px rgba(155, 209, 255, 0.15);
+  background: linear-gradient(135deg, #3b82f6, #06b6d4);
+  border: 1px solid transparent;
+  color: #ffffff;
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
 }
 
 .btnPrimary:hover,
 .btnPrimary:focus {
-  background: linear-gradient(135deg, rgba(155, 209, 255, 0.25), rgba(155, 209, 255, 0.15));
-  box-shadow: 0 12px 32px rgba(155, 209, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(59, 130, 246, 0.4);
+  background: linear-gradient(135deg, #3b82f6, #06b6d4);
 }
 
 /* Responsivo - Tablet */
 @media (max-width: 1024px) {
   .section {
-    padding: 32px 24px;
-    max-width: 1100px;
-    margin: 60px auto;
+    padding: 60px 0;
+  }
+
+  .container {
+    padding: 0 24px;
   }
 
   .card {
@@ -317,8 +334,11 @@
 /* Responsivo - Mobile */
 @media (max-width: 768px) {
   .section {
-    padding: 24px 20px;
-    margin: 40px auto;
+    padding: 40px 0;
+  }
+
+  .container {
+    padding: 0 20px;
   }
 
   .card {
@@ -385,5 +405,18 @@
   .chip {
     padding: 6px 12px;
     font-size: 0.82rem;
+  }
+}
+
+/* Respeitar preferência de reduzir movimento */
+@media (prefers-reduced-motion: reduce) {
+  .avatarContainer,
+  .avatarGlow {
+    animation: none;
+  }
+  
+  .section::before,
+  .section::after {
+    animation: none;
   }
 }
