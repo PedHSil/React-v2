@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
-import styles from '../styles/Projects.module.css'
-import { ExternalLink, X, Github } from 'lucide-react'
-import Ampere from '../imgs/ampere.png'
+import React, { useState, useRef, useEffect } from 'react';
+import { motion, useAnimation, useInView, useReducedMotion } from 'framer-motion';
+import styles from '../styles/Projects.module.css';
+import { ExternalLink, X, Github } from 'lucide-react';
+import Ampere from '../imgs/ampere.png';
 
 const projectsData = [
   {
@@ -62,80 +63,180 @@ const projectsData = [
     github: "https://github.com/seu-usuario/projeto6",
     demo: "https://projeto6-demo.com"
   }
-]
+];
 
 export default function Projects() {
-  const [selectedProject, setSelectedProject] = useState(null)
+  const [selectedProject, setSelectedProject] = useState(null);
+
+  // observe section to trigger animation on scroll
+  const sectionRef = useRef(null);
+  const controls = useAnimation();
+  const reduceMotion = useReducedMotion();
+  const isInView = useInView(sectionRef, { once: true, margin: '-120px' });
+
+  useEffect(() => {
+    if (isInView) controls.start('visible');
+  }, [isInView, controls]);
+
+  // safe body overflow handling when modal opens
+  useEffect(() => {
+    if (selectedProject) {
+      const previous = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = previous || 'unset';
+      };
+    }
+  }, [selectedProject]);
 
   const openModal = (project) => {
-    setSelectedProject(project)
-    document.body.style.overflow = 'hidden'
-  }
+    setSelectedProject(project);
+  };
 
   const closeModal = () => {
-    setSelectedProject(null)
-    document.body.style.overflow = 'unset'
-  }
+    setSelectedProject(null);
+  };
+
+  // animation variants
+  const containerVariant = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.06,
+      },
+    },
+  };
+
+  const cardVariant = {
+    hidden: { opacity: 0, y: 36 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+  };
+
+  const modalOverlayVariant = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 0.18 } },
+  };
+
+  const modalContentVariant = {
+    hidden: { opacity: 0, scale: 0.98, y: 12 },
+    visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.28, ease: 'easeOut' } },
+    exit: { opacity: 0, scale: 0.98, y: 8, transition: { duration: 0.18 } },
+  };
 
   return (
-    <section id="projetos" className={styles.section} aria-labelledby="projects-title">
+    <section
+      id="projetos"
+      className={styles.section}
+      aria-labelledby="projects-title"
+      ref={sectionRef}
+    >
       <h1 id="projects-title" className={styles.title}>
         Meus Projetos
       </h1>
 
-      <div className={styles.grid}>
+      <motion.div
+        className={styles.grid}
+        variants={containerVariant}
+        initial={reduceMotion ? 'visible' : 'hidden'}
+        animate={reduceMotion ? 'visible' : controls}
+        aria-live="polite"
+      >
         {projectsData.map((project) => (
-          <div key={project.id} className={styles.projectCard}>
-            <div className={styles.imageWrapper}>
-              <img 
-                src={project.image} 
-                alt={project.title}
-                className={styles.projectImage}
-              />
-              <div className={styles.imageOverlay}></div>
-            </div>
+  <motion.article
+    key={project.id}
+    className={styles.projectCard}
+    variants={cardVariant}
+    // transforma apenas visually — não deve provocar reflow
+    whileHover={{ y: -8, scale: 1.02 }}
+    transition={{ type: 'spring', stiffness: 220, damping: 20 }}
+    style={{ willChange: 'transform' }}
+    onHoverStart={(e) => {
+      // garante que card sobe visualmente sem ser coberto
+      e.currentTarget.style.zIndex = 20;
+      e.currentTarget.style.position = 'relative';
+    }}
+    onHoverEnd={(e) => {
+      e.currentTarget.style.zIndex = '';
+      e.currentTarget.style.position = '';
+    }}
+    role="group"
+    aria-labelledby={`project-title-${project.id}`}
+  >
+    <div className={styles.imageWrapper}>
+      <img
+        src={project.image}
+        alt={project.title}
+        className={styles.projectImage}
+        loading="lazy"
+      />
+      <div className={styles.imageOverlay} aria-hidden />
+    </div>
 
-            <div className={styles.cardContent}>
-              <h3 className={styles.projectTitle}>{project.title}</h3>
-              <p className={styles.projectDescription}>
-                {project.shortDescription}
-              </p>
+    <div className={styles.cardContent}>
+      <h3 id={`project-title-${project.id}`} className={styles.projectTitle}>
+        {project.title}
+      </h3>
+      <p className={styles.projectDescription}>
+        {project.shortDescription}
+      </p>
 
-              <div className={styles.techStack}>
-                {project.technologies.slice(0, 3).map((tech, idx) => (
-                  <span key={idx} className={styles.techBadge}>
-                    {tech}
-                  </span>
-                ))}
-                {project.technologies.length > 3 && (
-                  <span className={styles.techBadge}>
-                    +{project.technologies.length - 3}
-                  </span>
-                )}
-              </div>
-
-              <button 
-                className={styles.btnDetails}
-                onClick={() => openModal(project)}
-              >
-                Saiba mais
-              </button>
-            </div>
-          </div>
+      <div className={styles.techStack}>
+        {project.technologies.slice(0, 3).map((tech, idx) => (
+          <span key={idx} className={styles.techBadge}>
+            {tech}
+          </span>
         ))}
+        {project.technologies.length > 3 && (
+          <span className={styles.techBadge}>+{project.technologies.length - 3}</span>
+        )}
       </div>
+
+      <button
+        className={styles.btnDetails}
+        onClick={() => openModal(project)}
+        aria-haspopup="dialog"
+        aria-controls={selectedProject ? 'project-modal' : undefined}
+      >
+        Saiba mais
+      </button>
+    </div>
+  </motion.article>
+))}
+
+      </motion.div>
 
       {/* Modal */}
       {selectedProject && (
-        <div className={styles.modalOverlay} onClick={closeModal}>
-          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-            <button className={styles.closeButton} onClick={closeModal}>
-              <X size={24} />
+        <motion.div
+          className={styles.modalOverlay}
+          onClick={closeModal}
+          initial="hidden"
+          animate="visible"
+          exit="hidden"
+          variants={modalOverlayVariant}
+          role="dialog"
+          aria-modal="true"
+          id="project-modal"
+        >
+          <motion.div
+            className={styles.modalContent}
+            onClick={(e) => e.stopPropagation()}
+            variants={modalContentVariant}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
+            <button
+              className={styles.closeButton}
+              onClick={closeModal}
+              aria-label="Fechar modal"
+            >
+              <X size={20} />
             </button>
 
             <div className={styles.modalHeader}>
-              <img 
-                src={selectedProject.image} 
+              <img
+                src={selectedProject.image}
                 alt={selectedProject.title}
                 className={styles.modalImage}
               />
@@ -143,10 +244,8 @@ export default function Projects() {
 
             <div className={styles.modalBody}>
               <h2 className={styles.modalTitle}>{selectedProject.title}</h2>
-              
-              <p className={styles.modalDescription}>
-                {selectedProject.fullDescription}
-              </p>
+
+              <p className={styles.modalDescription}>{selectedProject.fullDescription}</p>
 
               <div className={styles.modalSection}>
                 <h3 className={styles.sectionTitle}>Tecnologias Utilizadas</h3>
@@ -161,32 +260,32 @@ export default function Projects() {
 
               <div className={styles.modalActions}>
                 {selectedProject.github && (
-                  <a 
+                  <a
                     href={selectedProject.github}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={styles.modalBtn}
                   >
-                    <Github size={20} />
-                    Ver no GitHub
+                    <Github size={16} />
+                    <span style={{ marginLeft: 8 }}>Ver no GitHub</span>
                   </a>
                 )}
                 {selectedProject.demo && (
-                  <a 
+                  <a
                     href={selectedProject.demo}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`${styles.modalBtn} ${styles.modalBtnPrimary}`}
                   >
-                    <ExternalLink size={20} />
-                    Ver Demo
+                    <ExternalLink size={16} />
+                    <span style={{ marginLeft: 8 }}>Ver Demo</span>
                   </a>
                 )}
               </div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       )}
     </section>
-  )
+  );
 }
