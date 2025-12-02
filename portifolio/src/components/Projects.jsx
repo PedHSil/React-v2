@@ -3,6 +3,8 @@ import { motion, useAnimation, useInView, useReducedMotion } from 'framer-motion
 import styles from '../styles/Projects.module.css';
 import { ExternalLink, X, Github } from 'lucide-react';
 import Ampere from '../imgs/ampere.png';
+import Java from '../imgs/java.png';
+import Clinica from '../imgs/clinica.png';
 
 const projectsData = [
   {
@@ -16,23 +18,21 @@ const projectsData = [
   },
   {
     id: 2,
-    title: "Dashboard Analytics",
-    shortDescription: "Dashboard interativo para visualização de dados com gráficos dinâmicos e relatórios em tempo real.",
-    fullDescription: "Aplicação de analytics com visualização de dados em tempo real, permitindo análise de métricas de negócio através de gráficos interativos, filtros avançados e exportação de relatórios. Integração com múltiplas APIs e banco de dados para processamento de grandes volumes de informação.",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop",
-    technologies: ["React", "TypeScript", "D3.js", "Python", "PostgreSQL"],
-    github: "https://github.com/seu-usuario/projeto2",
-    demo: "https://projeto2-demo.com"
+    title: "Painel de Analytics",
+    shortDescription: "Dashboard de analytics com visualização de dados em tempo real.",
+    fullDescription: "Dashboard contendo um CRUD completo para gestão de usuários e suas informações. Contem uma comunicação com um banco de dados MySQL para armazenamento e recuperação de dados.",
+    image: Java,
+    technologies: ["Java", "MySQL"],
+    github: "https://github.com/PedHSil/APS---2025-02---23-09-2025",
   },
   {
     id: 3,
-    title: "Task Management App",
-    shortDescription: "Aplicativo de gerenciamento de tarefas com funcionalidades de colaboração em equipe e notificações.",
-    fullDescription: "Sistema de gerenciamento de projetos e tarefas com recursos de colaboração em tempo real, atribuição de tarefas, priorização, sistema de notificações push, integração com calendário e geração de relatórios de produtividade. Suporta múltiplos projetos e equipes.",
-    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=500&fit=crop",
+    title: "Clinica Médica",
+    shortDescription: "Sistema de gerenciamento para clínica médica com agendamento de consultas e prontuários eletrônicos.",
+    fullDescription: "Sistema completo para gerenciamento de uma clínica médica, incluindo funcionalidades para agendamento de consultas, gerenciamento de prontuários eletrônicos, controle de estoque de medicamentos e geração de relatórios financeiros. O sistema foi desenvolvido com foco em usabilidade e segurança dos dados dos pacientes.",
+    image: Clinica,
     technologies: ["React", "Firebase", "Tailwind CSS", "Node.js"],
-    github: "https://github.com/seu-usuario/projeto3",
-    demo: "https://projeto3-demo.com"
+    github: "https://github.com/PedHSil/front-end-aps",
   },
   {
     id: 4,
@@ -68,7 +68,6 @@ const projectsData = [
 export default function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);
 
-  // observe section to trigger animation on scroll
   const sectionRef = useRef(null);
   const controls = useAnimation();
   const reduceMotion = useReducedMotion();
@@ -78,7 +77,6 @@ export default function Projects() {
     if (isInView) controls.start('visible');
   }, [isInView, controls]);
 
-  // safe body overflow handling when modal opens
   useEffect(() => {
     if (selectedProject) {
       const previous = document.body.style.overflow;
@@ -89,15 +87,21 @@ export default function Projects() {
     }
   }, [selectedProject]);
 
+  useEffect(() => {
+    const handler = (e) => {
+      if (e.key === 'Escape') setSelectedProject(null);
+    };
+    if (selectedProject) window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [selectedProject]);
+
   const openModal = (project) => {
-    setSelectedProject(project);
-  };
+  console.log('openModal called for project:', project?.title ?? project);
+  setSelectedProject(project);
+};
 
-  const closeModal = () => {
-    setSelectedProject(null);
-  };
+  const closeModal = () => setSelectedProject(null);
 
-  // animation variants
   const containerVariant = {
     hidden: {},
     visible: {
@@ -123,6 +127,10 @@ export default function Projects() {
     exit: { opacity: 0, scale: 0.98, y: 8, transition: { duration: 0.18 } },
   };
 
+  const hoverProps = reduceMotion
+    ? {}
+    : { whileHover: { translateY: -8, scale: 1.02 }, transition: { type: 'spring', stiffness: 220, damping: 20 } };
+
   return (
     <section
       id="projetos"
@@ -134,6 +142,7 @@ export default function Projects() {
         Meus Projetos
       </h1>
 
+      {/* parent motion controla o reveal dos filhos */}
       <motion.div
         className={styles.grid}
         variants={containerVariant}
@@ -142,70 +151,65 @@ export default function Projects() {
         aria-live="polite"
       >
         {projectsData.map((project) => (
-  <motion.article
-    key={project.id}
-    className={styles.projectCard}
-    variants={cardVariant}
-    // transforma apenas visually — não deve provocar reflow
-    whileHover={{ y: -8, scale: 1.02 }}
-    transition={{ type: 'spring', stiffness: 220, damping: 20 }}
-    style={{ willChange: 'transform' }}
-    onHoverStart={(e) => {
-      // garante que card sobe visualmente sem ser coberto
-      e.currentTarget.style.zIndex = 20;
-      e.currentTarget.style.position = 'relative';
-    }}
-    onHoverEnd={(e) => {
-      e.currentTarget.style.zIndex = '';
-      e.currentTarget.style.position = '';
-    }}
-    role="group"
-    aria-labelledby={`project-title-${project.id}`}
-  >
-    <div className={styles.imageWrapper}>
-      <img
-        src={project.image}
-        alt={project.title}
-        className={styles.projectImage}
-        loading="lazy"
-      />
-      <div className={styles.imageOverlay} aria-hidden />
-    </div>
+          // article estático no layout
+          <article
+            key={project.id}
+            className={styles.projectCard}
+            role="group"
+            aria-labelledby={`project-title-${project.id}`}
+            style={{ alignSelf: 'start' }}
+          >
+            {/* child: apenas variants (sem initial/animate) para respeitar o container */}
+            <motion.div
+              className={styles.cardInner}
+              variants={cardVariant}
+              {...hoverProps}
+              style={{ willChange: 'transform' }}
+            >
+              <div className={styles.imageWrapper}>
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className={styles.projectImage}
+                  loading="lazy"
+                />
+                <div className={styles.imageOverlay} aria-hidden />
+              </div>
 
-    <div className={styles.cardContent}>
-      <h3 id={`project-title-${project.id}`} className={styles.projectTitle}>
-        {project.title}
-      </h3>
-      <p className={styles.projectDescription}>
-        {project.shortDescription}
-      </p>
+              <div className={styles.cardContent}>
+                <h3 id={`project-title-${project.id}`} className={styles.projectTitle}>
+                  {project.title}
+                </h3>
+                <p className={styles.projectDescription}>
+                  {project.shortDescription}
+                </p>
 
-      <div className={styles.techStack}>
-        {project.technologies.slice(0, 3).map((tech, idx) => (
-          <span key={idx} className={styles.techBadge}>
-            {tech}
-          </span>
+                <div className={styles.techStack}>
+                  {project.technologies.slice(0, 3).map((tech, idx) => (
+                    <span key={idx} className={styles.techBadge}>
+                      {tech}
+                    </span>
+                  ))}
+                  {project.technologies.length > 3 && (
+                    <span className={styles.techBadge}>+{project.technologies.length - 3}</span>
+                  )}
+                </div>
+
+                <button
+                  type="button"
+                  className={styles.btnDetails}
+                  onClick={() => openModal(project)}
+                  aria-haspopup="dialog"
+                  aria-controls="project-modal"
+                >
+                  Saiba mais
+                </button>
+              </div>
+            </motion.div>
+          </article>
         ))}
-        {project.technologies.length > 3 && (
-          <span className={styles.techBadge}>+{project.technologies.length - 3}</span>
-        )}
-      </div>
-
-      <button
-        className={styles.btnDetails}
-        onClick={() => openModal(project)}
-        aria-haspopup="dialog"
-        aria-controls={selectedProject ? 'project-modal' : undefined}
-      >
-        Saiba mais
-      </button>
-    </div>
-  </motion.article>
-))}
-
       </motion.div>
 
-      {/* Modal */}
       {selectedProject && (
         <motion.div
           className={styles.modalOverlay}
@@ -230,6 +234,7 @@ export default function Projects() {
               className={styles.closeButton}
               onClick={closeModal}
               aria-label="Fechar modal"
+              type="button"
             >
               <X size={20} />
             </button>

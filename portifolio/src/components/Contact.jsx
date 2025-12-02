@@ -16,12 +16,25 @@ export default function Contact() {
     if (isInView) controls.start('visible');
   }, [isInView, controls]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Form submitted:', formData);
+  // dentro do seu componente Contact (substitui handleSubmit)
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const resp = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    });
+    const data = await resp.json();
+    if (!resp.ok) throw new Error(data.error || 'Erro desconhecido');
     alert('Mensagem enviada com sucesso!');
     setFormData({ name: '', email: '', phone: '', message: '' });
-  };
+  } catch (err) {
+    console.error(err);
+    alert('Falha ao enviar. Tente novamente mais tarde.');
+  }
+};
+
 
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
