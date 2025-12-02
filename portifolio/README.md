@@ -21,3 +21,9 @@ npm install
 npm install simple-icons
 
 npm install lucide-react
+
+npm install react-awesome-reveal
+
+npm install @emotion/react
+
+npm install framer-motion
