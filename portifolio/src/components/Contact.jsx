@@ -17,23 +17,23 @@ export default function Contact() {
   }, [isInView, controls]);
 
   // dentro do seu componente Contact (substitui handleSubmit)
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  try {
-    const resp = await fetch('/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    });
-    const data = await resp.json();
-    if (!resp.ok) throw new Error(data.error || 'Erro desconhecido');
-    alert('Mensagem enviada com sucesso!');
-    setFormData({ name: '', email: '', phone: '', message: '' });
-  } catch (err) {
-    console.error(err);
-    alert('Falha ao enviar. Tente novamente mais tarde.');
-  }
-};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const resp = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      const data = await resp.json();
+      if (!resp.ok) throw new Error(data.error || 'Erro desconhecido');
+      alert('Mensagem enviada com sucesso!');
+      setFormData({ name: '', email: '', phone: '', message: '' });
+    } catch (err) {
+      console.error(err);
+      alert('Falha ao enviar. Tente novamente mais tarde.');
+    }
+  };
 
 
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -178,29 +178,69 @@ const handleSubmit = async (e) => {
 
         {/* Coluna direita - Formulário */}
         <motion.div className={styles.formColumn} variants={itemVariant}>
-          <motion.form className={styles.formContainer} onSubmit={handleSubmit} noValidate>
+          <motion.form
+            className={styles.formContainer}
+            action="https://formsubmit.co/pedroh422silva@gmail.com"
+            method="POST"
+            noValidate
+          >
+            {/* Configurações ocultas do FormSubmit */}
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_next" value="https://google.com" />
+
             <motion.div className={styles.formGroup} variants={itemVariant}>
               <label htmlFor="name" className={styles.label}>Nome Completo</label>
-              <input id="name" name="name" value={formData.name} onChange={handleChange}
-                className={styles.input} required placeholder="Seu nome" />
+              <input
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                className={styles.input}
+                required
+                placeholder="Seu nome"
+              />
             </motion.div>
 
             <motion.div className={styles.formGroup} variants={itemVariant}>
               <label htmlFor="email" className={styles.label}>Email</label>
-              <input id="email" name="email" type="email" value={formData.email} onChange={handleChange}
-                className={styles.input} required placeholder="seu.email@exemplo.com" />
+              <input
+                id="email"
+                name="email"
+                type="email"
+                value={formData.email}
+                onChange={handleChange}
+                className={styles.input}
+                required
+                placeholder="seu.email@exemplo.com"
+              />
             </motion.div>
 
             <motion.div className={styles.formGroup} variants={itemVariant}>
               <label htmlFor="phone" className={styles.label}>Telefone</label>
-              <input id="phone" name="phone" type="tel" value={formData.phone} onChange={handleChange}
-                className={styles.input} placeholder="(19) 99999-9999" />
+              <input
+                id="phone"
+                name="phone"
+                type="tel"
+                value={formData.phone}
+                onChange={handleChange}
+                className={styles.input}
+                placeholder="(19) 99999-9999"
+              />
             </motion.div>
 
             <motion.div className={styles.formGroup} variants={itemVariant}>
               <label htmlFor="message" className={styles.label}>Mensagem</label>
-              <textarea id="message" name="message" value={formData.message} onChange={handleChange}
-                className={styles.textarea} required placeholder="Descreva seu projeto ou proposta..." rows="5" />
+              <textarea
+                id="message"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                className={styles.textarea}
+                required
+                placeholder="Descreva seu projeto ou proposta..."
+                rows="5"
+              />
             </motion.div>
 
             <motion.button
@@ -215,6 +255,7 @@ const handleSubmit = async (e) => {
               <Send size={16} style={{ marginRight: 8 }} /> Enviar Mensagem
             </motion.button>
           </motion.form>
+
         </motion.div>
       </motion.div>
     </section>
