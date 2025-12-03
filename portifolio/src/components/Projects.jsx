@@ -5,6 +5,7 @@ import { ExternalLink, X, Github } from 'lucide-react';
 import Ampere from '../imgs/ampere.png';
 import Java from '../imgs/java.png';
 import Clinica from '../imgs/clinica.png';
+import Portifolio from '../imgs/port.png';
 
 const projectsData = [
   {
@@ -36,33 +37,14 @@ const projectsData = [
   },
   {
     id: 4,
-    title: "Social Media API",
-    shortDescription: "API RESTful para rede social com sistema de posts, comentários, likes e sistema de seguidores.",
-    fullDescription: "API completa para aplicação de rede social incluindo autenticação JWT, sistema de posts com imagens, comentários aninhados, sistema de likes e compartilhamentos, funcionalidade de seguir/deixar de seguir usuários, feed personalizado baseado em algoritmo, e sistema de notificações em tempo real.",
-    image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&h=500&fit=crop",
-    technologies: ["Node.js", "Express", "MongoDB", "Socket.io", "JWT"],
-    github: "https://github.com/seu-usuario/projeto4"
+    title: "Portifólio Pessoal",
+    shortDescription: "Website de portfólio pessoal para exibir projetos e habilidades.",
+    fullDescription: "Website de portfólio pessoal desenvolvido para apresentar meus projetos, habilidades e experiências profissionais. O site é responsivo, com design moderno e inclui seções para blog, contato e download de currículo. Utiliza animações sutis para melhorar a experiência do usuário.",
+    image: Portifolio,
+    technologies: ["React", "Javascript"],
+    github: "https://github.com/PedHSil/React-v2/tree/main/portifolio"
   },
-  {
-    id: 5,
-    title: "Portfolio Website",
-    shortDescription: "Site portfolio moderno e responsivo com animações suaves e design minimalista.",
-    fullDescription: "Website portfolio desenvolvido com foco em performance e experiência do usuário. Conta com animações suaves, transições elegantes, design responsivo para todos os dispositivos, otimização SEO, modo escuro/claro, e integração com formulário de contato. Desenvolvido com as melhores práticas de acessibilidade.",
-    image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&h=500&fit=crop",
-    technologies: ["React", "CSS3", "JavaScript", "Vite"],
-    github: "https://github.com/seu-usuario/projeto5",
-    demo: "https://projeto5-demo.com"
-  },
-  {
-    id: 6,
-    title: "Weather Forecast App",
-    shortDescription: "Aplicativo de previsão do tempo com dados em tempo real e interface intuitiva.",
-    fullDescription: "Aplicação de previsão meteorológica que utiliza APIs de clima para fornecer dados precisos e atualizados. Recursos incluem previsão para 7 dias, condições atuais detalhadas, mapas de radar, alertas climáticos, histórico de temperaturas e busca por localização. Interface responsiva e animações baseadas nas condições climáticas.",
-    image: "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=800&h=500&fit=crop",
-    technologies: ["React", "OpenWeather API", "CSS3", "Geolocation API"],
-    github: "https://github.com/seu-usuario/projeto6",
-    demo: "https://projeto6-demo.com"
-  }
+  
 ];
 
 export default function Projects() {
