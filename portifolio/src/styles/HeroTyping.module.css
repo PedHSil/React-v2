@@ -395,6 +395,10 @@
     flex: 0 0 250px;
   }
 
+  .container{
+    margin-top: 140px;
+  }
+  
   .avatar {
     height: 250px;
     border-radius: 20px;
@@ -427,7 +431,6 @@
 
   .btnPrimary,
   .btnSecondary {
-    width: 100%;
     justify-content: center;
   }
 }
