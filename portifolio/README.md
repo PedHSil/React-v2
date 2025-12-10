@@ -27,3 +27,6 @@ npm install react-awesome-reveal
 npm install @emotion/react
 
 npm install framer-motion
+
+npm install react-router-dom
+

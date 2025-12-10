@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { motion, useAnimation, useInView, useReducedMotion } from 'framer-motion';
 import styles from '../styles/Skill.module.css';
-import * as SimpleIcons from 'simple-icons/icons';
+import * as SimpleIcons from 'simple-icons';
 import { Database, Settings } from 'lucide-react';
 
 const skills = [
